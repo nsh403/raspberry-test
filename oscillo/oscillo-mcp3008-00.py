@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 """
 A simple example of an animated plot
 
