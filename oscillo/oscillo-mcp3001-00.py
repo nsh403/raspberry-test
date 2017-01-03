@@ -8,10 +8,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
-from gpiozero import MCP3008
+from gpiozero import MCP3001
 
 #   Prepare AD Converter
-pot = MCP3008(0)
+pot = MCP3001()
 
 fig, ax = plt.subplots()
 
@@ -36,8 +36,10 @@ y = x/10
 def my_animate(i_caller):
         
     for i in range(len(y)):
-        y[i] = i/100. - i_caller/20.    # for simulation
-        #y[i] = pot.value    # for real ADC data
+        #y[i] = i/100. - i_caller/20.    # for simulation
+        y[i] = pot.value    # for real ADC data
+
+    print y
         
     line.set_ydata(y)  # update the data
     return line,
@@ -48,7 +50,7 @@ def init():
     return line,
 
 ani = animation.FuncAnimation(fig, my_animate, np.arange(1, 20), init_func=init,
-    interval=50, blit=True)
+    interval=100, blit=True)
 
 plt.show()
 
